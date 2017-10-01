@@ -15,10 +15,14 @@ export class CoursesV2Component {
   author$;
 
   constructor(private db: AngularFireDatabase ) {
-    this.courses$ = db.list('/courses');
+    
     this.course$ = db.object('/courses/1');
     this.author$ = db.object('/authors/1');
 
+  }
+
+  read(){
+    this.courses$ = this.db.list('/courses');
   }
 
   add(course){

@@ -1,27 +1,41 @@
-<h1>List of courses</h1>
-<ul>
-    <li *ngFor= "let course of courses$ | async ">
-      {{ course.$value  ||  course.name}}
-      <button (click)="update(course)"> Update </button>
-      <button (click)="delete(course)"> Delete </button>
-    </li>
-</ul>
-<h2>Add Data in Database</h2>
-<input type="text" (keyup.enter)="add(course)"  #course>
+<div class="container">
+    <h1>Firebase CRUD Operations</h1>
+    <hr>
+    <h3>List of courses</h3>
+    <button class="btn btn-primary btn-sm" (click)="read()"> Read Data </button>
+   
+    <ul>
+        <li *ngFor= "let course of courses$ | async ">
+            {{ course.$value  ||  course.name}}
+            <button class="btn btn-primary btn-sm" (click)="update(course)"> Update </button>
+            <button class="btn btn-primary btn-sm" (click)="delete(course)"> Delete </button>
+        </li>
+    </ul>
+
+    <hr>
+    <h2>Add Data in Database</h2>
+    <input type="text"   #course>
+    <button class="btn btn-primary btn-sm" (click)="add(course)"> Add Data </button>
+
+    <hr>
+    <h2>Course data in json form</h2>  
+    <p> {{ course$ | async | json }} </p>
+
+    <hr>
+    <h2>Author data in json form</h2> 
+    <p> {{ author$ | async | json }} </p>
+
+    <hr>
+    <h2>Using "as" alias </h2>
+    <ul *ngIf=" (author$ | async) as author">
+        <li>{{ author.name }}</li>
+        <li>{{ author.students }}</li>
+        <li>{{ author.isPremium }}</li>
+    </ul>
 
 
-<h2>Course data in json form</h2>  
-<p> {{ course$ | async | json }} </p>
+</div>
 
 
-<h2>Author data in json form</h2> 
-<p> {{ author$ | async | json }} </p>
 
-
-<h2>Using "as" alias </h2>
-<ul *ngIf=" (author$ | async) as author">
-    <li>{{ author.name }}</li>
-    <li>{{ author.students }}</li>
-    <li>{{ author.isPremium }}</li>
-</ul>
 
